@@ -1,0 +1,17 @@
+version: '3.1'
+services:
+  db:
+    image: mysql:latest
+    container_name: userservicedb
+    restart: always
+    environment:
+      - "MYSQL_DATABASE:userservicedb"
+      - "MYSQL_ROOT_PASSWORD:root"
+    ports:
+      - "3306:3306"
+    command: "--init-file /data/application/init.sql"
+    volumes:
+      - "userservice_data:/var/lib/mysql"
+      - "./init.sql:/data/application/init.sql"
+volumes:
+  userservice_data:
