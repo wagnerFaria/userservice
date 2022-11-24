@@ -1,15 +1,14 @@
 package io.getarrays.userservice.api;
 
+import io.getarrays.userservice.api.requestForms.RoleToUserForm;
 import io.getarrays.userservice.domain.Role;
 import io.getarrays.userservice.domain.User;
 import io.getarrays.userservice.service.UserService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -35,13 +34,7 @@ public class UserResource {
 
     @PostMapping("/role/addToUser")
     public ResponseEntity<?> AddRoleToUser(@RequestBody RoleToUserForm form) {
-        userService.addRoleToUser(form.username, form.roleName);
+        userService.addRoleToUser(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
-}
-
-@Data
-class RoleToUserForm {
-    private String username;
-    private String roleName;
 }
